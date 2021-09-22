@@ -316,6 +316,7 @@ hist = pd.DataFrame(history.history)
 hist['epoch'] = history.epoch
 hist.tail()
 
+"""
 def plot_history(history):
     hist = pd.DataFrame(history.history)
     hist['epoch'] = history.epoch
@@ -337,3 +338,4 @@ def plot_history(history):
 
 
 plot_history(history)
+"""
