@@ -1,2 +1,3 @@
 # learning_tensorflow
-asd 
+This is a remote git repository for learning tensorflow
+
