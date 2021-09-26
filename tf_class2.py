@@ -8,7 +8,7 @@ from tensorflow import keras
 from tensorflow.keras import layers
 
 # tf2 使用即时执行模式（Eager Execution）， tf1中需要关闭这一模式
-
+# abcdefg
 # Part 1: tf 基础知识
 # 1， 张量的参数
 
