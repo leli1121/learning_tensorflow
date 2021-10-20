@@ -96,7 +96,7 @@ print(y, y_grad)
 # 多变量求导
 X = tf.constant([[1., 2.], [3., 4.]])  # shape=(2, 2)
 w = tf.Variable([[1.], [2.]])  # shape = (2, 1)
-b = tf.Variable([[1.], [1.]], trainable=False)  # shape = (2, 1)
+b = tf.Variable([[1.], [1.]], trainable=True)  # shape = (2, 1)
 y = tf.constant([[1.], [2.]])  # shape = (2, 1)
 
 with tf.GradientTape() as tape:
@@ -273,7 +273,7 @@ plt.scatter(test_labels, test_predictions)
 plt.xlabel('True Values [MPG]')
 plt.ylabel('Predictions [MPG]')
 plt.axis('equal')
-plt.axis('square')
+#plt.axis('square')
 plt.xlim([0, plt.xlim()[1]])
 plt.ylim([0, plt.ylim()[1]])
 _ = plt.plot([-100, 100], [-100, 100])
@@ -283,7 +283,10 @@ _ = plt.plot([-100, 100], [-100, 100])
 # 利用TF中已有模型构造
 def build_model():
     model = keras.Sequential([
-            layers.Dense(64, activation='relu', input_shape=[len(train_dataset.keys())]),
+            layers.Dense(64,
+                         activation='relu',
+                         kernel_regularizer=tf.keras.regularizers.l1(0.05),
+                         input_shape=[len(train_dataset.keys())]),
             layers.Dense(1)])
 
     optimizer = tf.keras.optimizers.SGD(lr=0.001)
@@ -323,7 +326,7 @@ def plot_history(history):
     plt.figure()
     plt.xlabel('Epoch')
     plt.ylabel('Mean Abs Error [MPG]')
-    plt.plot(hist['epoch'], hist['mae'], label='Train Error')
+    #plt.plot(hist['epoch'], hist['mae'], label='Train Error')
     plt.ylim([0, 5])
     plt.legend()
 
@@ -337,3 +340,6 @@ def plot_history(history):
 
 
 plot_history(history)
+
+
+
