@@ -27,10 +27,10 @@ x_train = np.array([one_hot[char2id['a']],
                     one_hot[char2id['e']]])
 
 y_train = np.array([char2id['b'],
-                    char2id['c'],  # y_train 的shape （batch，1）
-                    char2id['d'],  # y_train 的shape （batch，1）
-                    char2id['e'],  # y_train 的shape （batch，1）
-                    char2id['a']])  # y_train 的shape （batch，1）
+                    char2id['c'],
+                    char2id['d'],
+                    char2id['e'],
+                    char2id['a']])
 
 
 
@@ -54,7 +54,8 @@ model.add(tf.keras.layers.SimpleRNN(hidden_units))
 model.add(tf.keras.layers.Dense(5, activation='softmax'))
 
 model.compile(optimizer=tf.keras.optimizers.Adam(0.01),
-              #
+              # 若y是scalar，用SparseCategoricalCrossentropy来计算交叉熵损失
+              # 若y被转成one-hot编码，用CategoricalCrossentropy 来计算交叉熵损失
               loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=False),
               metrics = 'sparse_categorical_accuracy')
 
@@ -78,6 +79,14 @@ history = model.fit(x_train, y_train,
                     verbose=1,
                     callbacks=[callback])
 model.summary()
+
+"""
+注：保存模型到ckpt后，会生成3个文件
+checkpoint文件是列出保存的所有模型以及最近模型的相关信息
+data文件是包含训练变量的文件；
+.index是描述variable中key和value的对应关系；
+"""
+
 
 # 5, 保存weight
 weight_file_path = './weights/weight.txt'

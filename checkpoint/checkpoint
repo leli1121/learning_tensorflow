@@ -1,0 +1,2 @@
+model_checkpoint_path: "rnn_character_one_to_one.ckpt"
+all_model_checkpoint_paths: "rnn_character_one_to_one.ckpt"
