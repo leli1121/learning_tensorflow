@@ -25,7 +25,8 @@ def build_model():
     model = keras.Sequential([
             layers.Dense(1,
                          kernel_regularizer=tf.keras.regularizers.l1(10),
-                         input_shape=[p])])
+                         input_shape=[p],
+                         dropout=0.5)])
 
     optimizer = tf.keras.optimizers.SGD(lr=0.001)
 
@@ -39,7 +40,7 @@ model = build_model()
 model.summary()
 
 
-history = model.fit(x, y, epochs=EPOCHS, verbose=0, batch_size=BATCH_SIZE)
+history = model.fit(x, y, epochs=EPOCHS, verbose=1, batch_size=BATCH_SIZE)
 
 parameters = model.trainable_variables[0].numpy()
 
