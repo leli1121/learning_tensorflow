@@ -101,7 +101,7 @@ with open(weight_file_path, 'w') as f:
         f.write(str(w.numpy()) + '\n')
 
 
-# 6, 分析结构
+# 6, 分析结果
 loss = history.history['loss']
 accuray = history.history['sparse_categorical_accuracy']  # 准确率
 
@@ -119,7 +119,7 @@ plt.show()
 
 # 7, 用训练好的模型进行预测
 
-x = 'a'
+x = 'e'
 x_test = one_hot[char2id[x]]
 x_test = np.reshape(x_test, newshape=(1, 1, len(x_test)))
 y_pred = model.predict(x_test)
